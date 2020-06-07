@@ -6,7 +6,6 @@ from bullet import Bullet
 from alien import Alien
 
 
-
 def change_fleet_direction(ai_settings, aliens):
     """Drop the entire fleet and change the fleet's direction."""
     for alien in aliens.sprites():
@@ -62,6 +61,11 @@ def create_fleet(ai_settings, screen, ship, aliens):
             create_alien(ai_settings, screen, aliens, alien_number,
                 row_number)
 
+def check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets):
+    """Respond to bullet-alien collisions."""
+    # Remove any bullets and aliens that have collided.
+    collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
+
 
 def update_bullets(ai_settings, screen, ship, aliens, bullets):
     """Update position of bullets and get rid of old bullets."""
@@ -69,7 +73,7 @@ def update_bullets(ai_settings, screen, ship, aliens, bullets):
     bullets.update()
     # Check for any bullets that have hit aliens.
     # If so, get rid of the bullet and the alien.
-    collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
+    check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets)
 
     if len(aliens) == 0:
         # Destroy existing bullets and create new fleet.
@@ -82,7 +86,6 @@ def update_bullets(ai_settings, screen, ship, aliens, bullets):
             bullets.remove(bullet)
 
 
-
 def check_keydown_events(event, ai_settings, screen, ship, bullets):
     """Respond to key presses."""
     if event.key == pygame.K_RIGHT:
@@ -93,7 +96,6 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets):
         fire_bullet(ai_settings, screen, ship, bullets)
     elif event.key == pygame.K_q:
         sys.exit()
-
 
 
 def fire_bullet(ai_settings, screen, ship, bullets):
