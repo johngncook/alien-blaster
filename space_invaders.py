@@ -13,9 +13,12 @@ import game_functions as gf
 def run_game():
     # Initialize pygame, settings, and screen object
     pygame.init()
+    pygame.mixer.init()
+    pygame.mixer.music.load('Music/Starlight.mp3')
+    pygame.mixer.music.play()
     ai_settings = Settings()
     screen = pygame.display.set_mode(
-        (ai_settings.screen_width, ai_settings.screen_height))
+        (ai_settings.screen_width, ai_settings.screen_height), pygame.FULLSCREEN)
     pygame.display.set_caption("Alien Invasion")
 
     # Make the Play button.

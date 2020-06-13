@@ -9,6 +9,10 @@ from alien import Alien
 
 def ship_hit(ai_settings, screen, stats, sb, ship, aliens, bullets):
     """Respond to ship being hit by alien."""
+    # Make explosion sound
+    cs = pygame.mixer.Sound('Sounds/explosion.wav')
+    cs.stop()
+    cs.play()
     if stats.ships_left > 0:
         # Decrement ships_left.
         stats.ships_left -= 1
@@ -94,6 +98,9 @@ def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship,
     collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
 
     if collisions:
+        cs = pygame.mixer.Sound('Sounds/explosion.wav')
+        cs.stop()
+        cs.play()
         for aliens in collisions.values():
             stats.score += ai_settings.alien_points * len(aliens)
             sb.prep_score()
@@ -151,8 +158,13 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets):
 def fire_bullet(ai_settings, screen, ship, bullets):
     # Create a new bullet and add it to the bullets group.
     if len(bullets) < ai_settings.bullets_allowed:
+        fs = pygame.mixer.Sound('Sounds/laser1.wav')
+        fs.stop()
+        fs.play()
         new_bullet = Bullet(ai_settings, screen, ship)
         bullets.add(new_bullet)
+
+
 
 
 def check_keyup_events(event, ship):
