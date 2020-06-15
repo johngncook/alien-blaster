@@ -4,3 +4,5 @@ It is a space invaders type alien shooter that puts the player in charge of a sp
 To begin the game just run the main_game.py file.
 
 Enjoy!
+
+Credit to the game art goes to Carlos Alface Game Design.
