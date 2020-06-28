@@ -8,6 +8,8 @@ It is a space invaders type alien shooter that puts the player in control of a s
 
 To begin the game just run the main_game.py file.
 
+To end the game and close the window, hit Q on the keyboard.
+
 
 
 ### Prerequisites
